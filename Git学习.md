@@ -6,6 +6,8 @@
 
 * 官方网站[Git](https://git-scm.com/)
 
+* 学习[网站](https://blog.csdn.net/l_215851356/article/details/79063942)
+
 * 简易流程
 
   > 1. 创建本地仓库
@@ -187,12 +189,34 @@ $ ssh-keygen -t rsa -C "youremail@example.com"
 - 此后，每次本地提交后，只要有必要，就可以使用命令`git push origin master`推送最新修改；
 - *origin 自定义*
 
+### 关联非master分支库
+
+github上已经有master分支 和dev分支
+
+在本地
+
+`git checkout -b dev` 新建并切换到本地dev分支
+
+`git pull origin dev `本地分支与远程分支相关联
+
+在本地新建分支并推送到远程
+
+`git checkout -b test`
+
+`git push origin test `  这样远程仓库中也就创建了一个test分支
+
 ### 克隆远程仓库
 
 用命令`git clone`克隆一个本地库：
 
 ```
 $ git clone git@github.com:michaelliao/gitskills.git
+```
+
+克隆非master分支(在克隆主分支之后)
+
+```
+$ git checkout -b branchName origin/branchName
 ```
 
 查看关联的远程库的名称
