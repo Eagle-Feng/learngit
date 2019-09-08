@@ -6,6 +6,95 @@
 
 * 官方网站[Git](https://git-scm.com/)
 
+* 简易流程
+
+  > 1. 创建本地仓库
+  >
+  >    ```
+  >    $ mkdir learngit
+  >    $ cd learngit
+  >    $ pwd
+  >    /Users/myname/learngit
+  >    ```
+  >
+  >    ```
+  >    $ git init
+  >    Initialized empty Git repository in /Users/michael/learngit/.git/
+  >    ```
+  >
+  > 2. 添加文件到缓存区
+  >
+  >    ```
+  >    $ git add readme.txt
+  >    $ git add file2.txt file3.txt
+  >    ```
+  >
+  > 3. 提交到本地版本库
+  >
+  >    ```
+  >    $ git commit -m "some comment"
+  >    ```
+  >
+  > 4. 与远程仓库建立连接
+  >
+  >    创建ssh key
+  >
+  >    ```
+  >    $ ssh-keygen -t rsa -C "youremail@example.com"
+  >    ```
+  >
+  >     将`id_rsa.pub`内容复制远程库（github/gitee）的SSH公钥中
+  >
+  > 5. 本地库与远程库关联
+  >
+  >    在远程库中创建与本地库同名的仓库
+  >
+  >    使用`git remote`命令建立连接（关联GitHub：name=github，关联码云：name=gitee）
+  >
+  >    ```
+  >    $ git remote add name git@server-name:path/repo-name.git
+  >    ```
+  >
+  >    对于使用`git clone`命令从远程库克隆仓库到本地
+  >
+  >    ```
+  >    $ git clone git@github.com:michaelliao/gitskills.git
+  >    ```
+  >
+  >    此时无需使用`git remote`命令建立连接，可以使用`git remote -v`查看`name`
+  >
+  > 6. 推送本地库到远程库
+  >
+  >    第一次推送
+  >
+  >    ```
+  >    $ git push -u name master
+  >    ```
+  >
+  >    后续推送
+  >
+  >    ```
+  >    $ git push name master
+  >    ```
+  >
+  >    不同远程库，`name`也不同，可通过`git remote -v`查看
+  >
+  > 7. 上述流程第一次完成后，后续只需：
+  >
+  >    ```
+  >    $ git add *
+  >    $ git commit *
+  >    $ git push *
+  >    ```
+  >
+  >    
+  >
+  > 8. 可以通过`git status`查看仓库状态
+  >
+  > 9. 
+
+
+
 ## 安装Git
 
 ### 在Windows是安装Git
@@ -104,6 +193,12 @@ $ ssh-keygen -t rsa -C "youremail@example.com"
 
 ```
 $ git clone git@github.com:michaelliao/gitskills.git
+```
+
+查看关联的远程库的名称
+
+```
+$ git remote -v
 ```
 
 
@@ -211,3 +306,39 @@ git push github master
 git push gitee master
 ```
 
+## 分支管理
+
+查看分支：`git branch`
+
+创建分支：`git branch <name>`
+
+切换分支：`git checkout <name>`或者`git switch <name>`
+
+创建+切换分支：`git checkout -b <name>`或者`git switch -c <name>`
+
+合并某分支到当前分支：`git merge <name>`
+
+```
+$ $ git merge --no-ff -m "merge with no-ff" dev
+```
+
+删除分支：`git branch -d <name>`
+
+用带参数的`git log`也可以看到分支的合并情况：
+
+```
+$ git log --graph --pretty=oneline --abbrev-commit
+*   cf810e4 (HEAD -> master) conflict fixed
+|\  
+| * 14096d0 (feature1) AND simple
+* | 5dc6824 & simple
+|/  
+* b17d20e branch test
+* d46f35e (origin/master) remove test.txt
+* b84166e add test.txt
+* 519219b git tracks changes
+* e43a48b understand how stage works
+* 1094adb append GPL
+* e475afc add distributed
+* eaadf4e wrote a readme file
+```
